@@ -1,0 +1,20 @@
+.component-toggle {
+  display: flex;
+  align-items: center;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 5px;
+  background-color: #eeeeee;
+  border-radius: 4px;
+}
+.btn + .btn {
+  margin-left: 10px;
+}
+.filter-wrap {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}

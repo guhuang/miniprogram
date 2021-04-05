@@ -1,0 +1,12 @@
+<view class="component-toggle">
+  <text>组件选项：</text>
+  <text class="btn show">显示</text>
+  <text class="btn hide">隐藏</text>
+</view>
+<view class="filter-wrap">
+  <text>过滤条件：</text>
+  <text class="btn" bindtap="modifyConditions" data-type="city">城市修改</text>
+  <text class="btn" bindtap="modifyConditions" data-type="department">部门修改</text>
+  <text class="btn" bindtap="modifyConditions" data-type="title">关键字修改</text>
+</view>
+<list params="{{params}}" />

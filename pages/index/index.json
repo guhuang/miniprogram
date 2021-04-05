@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "list": "/components/list/index",
+    "icon-rotate": "/components/icon-rotate/index"
+  }
+}

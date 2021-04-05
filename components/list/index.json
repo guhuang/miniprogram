@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "list-loading-tips": "/components/list-loading-tips/index"
+  }
+}

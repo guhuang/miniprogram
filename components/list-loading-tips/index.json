@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "icon-rotate": "/components/icon-rotate/index"
+  }
+}

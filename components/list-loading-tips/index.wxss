@@ -1,0 +1,35 @@
+.loading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbbbbb;
+}
+.loading-wrap.icon-loading::after {
+  width: 2px;
+  height: 2px;
+  background-color: #bbbbbb;
+  border-radius: 50%;
+  box-shadow: 0 8px #bbbbbb,
+    4px 4px #bbbbbb,
+    -4px 4px #bbbbbb;
+}
+.loading-wrap.icon-loading::before {
+  width: 2px;
+  height: 2px;
+  background-color: #bbbbbb;
+  border-radius: 50%;
+  transform-origin: 0 4px;
+  transform: rotate(45deg);
+  box-shadow: 0 8px #bbbbbb,
+    4px 4px #bbbbbb,
+    -4px 4px #bbbbbb;
+}
+.empty-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  background-color: #eeeeee;
+  color: red;
+}

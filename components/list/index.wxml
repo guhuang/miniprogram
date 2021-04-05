@@ -1,0 +1,8 @@
+<!--components/list/index.wxml-->
+<text>components/list/index.wxml</text>
+<view>
+  <block wx:for="{{ renderList }}" wx:key="index">
+    <view class="item" wx:for="{{ item }}" wx:key="index">{{ item.name }}</view>
+  </block>
+  <list-loading-tips is-end="{{isEnd}}" is-empty="{{isEmpty}}" />
+</view>
