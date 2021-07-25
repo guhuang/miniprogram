@@ -1,5 +1,6 @@
 // app.js
 App({
-  onLaunch() {
-  }
+    onLaunch(options) {
+    },
+    globalData: {},
 })

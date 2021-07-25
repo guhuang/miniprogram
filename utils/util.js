@@ -29,7 +29,7 @@ function unique (fn) {
   }
 }
 
-module.exports = {
+export default {
   formatTime,
   unique
 }
