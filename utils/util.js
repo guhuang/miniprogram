@@ -14,22 +14,13 @@ const formatNumber = n => {
   return n[1] ? n : `0${n}`
 }
 
-function unique (fn) {
-  let p = null
-  return async function () {
-    try {
-      if (p) {
-        return await p
-      }
-      p = fn.apply(this, arguments)
-      return await p
-    } finally {
-      p = null
+export function unique(fn) {
+    let p = null
+    return async function () {
+        try {
+            return await (p || (p = fn.apply(this, arguments)))
+        } finally {
+            p = null
+        }
     }
-  }
-}
-
-export default {
-  formatTime,
-  unique
 }
