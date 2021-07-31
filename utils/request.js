@@ -1,34 +1,34 @@
 import { unique } from './util'
 import apiConfig from '../config/api'
-
-function _registerApi(context = {}) {
-    Object.keys(apiConfig).forEach(apiName => {
-        const baseConfig = apiConfig[apiName]
-        context[apiName] = unique(context.send.bind(context, baseConfig))
-    })
-}
-
-async function _wxRequest(config) {
-    return new Promise((resolve, reject) => {
-        wx.request(Object.assign({}, config, {
-            success(value) {
-                console.log('wx.request success:', value)
-                resolve(value)
-            },
-            fail(e) {
-                console.log('wx.request fail:', e)
-                reject(e)
-            }
-        }))
-    })
-}
+import envConfig from '../config/env'
 
 /*
-* (new Request()).user.userInfo(data, config)
+* (new Request()).userInfo(data, config)
 * */
 class Request {
     constructor() {
-        _registerApi(this)
+        this.registerApi(apiConfig)
+    }
+    static async _request(config) {
+        return new Promise((resolve, reject) => {
+            wx.request(Object.assign({}, config, {
+                success(value) {
+                    console.log('wx.request success:', value)
+                    resolve(value)
+                },
+                fail(e) {
+                    console.log('wx.request fail:', e)
+                    reject(e)
+                }
+            }))
+        })
+    }
+    registerApi(apiConfig = {}) {
+        Object.keys(apiConfig).forEach(apiName => {
+            const baseConfig = apiConfig[apiName]
+            this[apiName] = unique(this.send.bind(this, baseConfig))
+        })
+        return this;
     }
     /*
     * @param {object} baseConfig - 接口配置
@@ -42,7 +42,9 @@ class Request {
             dataType: 'json',
         }, baseConfig, config)
         config.data = data
-        await _wxRequest(config)
+        config.url = envConfig.SERVER_URL + config.url
+        config.method = config.method.toUpperCase()
+        return await Request._request(config)
     }
 }
 

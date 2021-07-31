@@ -6,24 +6,23 @@ import {
     showToast
 } from './wx-api'
 
-
-let _APP
+let _App
 let PageConstructor
 
-function _setApp(context) {
-    if (!_APP) {
-        _APP = context || getApp()
+function _setApp(App) {
+    if (!_App) {
+        _App = App || getApp()
     }
 }
-export function setScene(context) {
-    _setApp(context)
+export function setScene(App) {
+    _setApp(App)
     const options = wx.getLaunchOptionsSync()
-    _APP.globalData.scene = options.scene
+    _App.globalData.scene = options.scene
 }
 
 export function getScene() {
     _setApp()
-    return _APP.globalData.scene
+    return _App.globalData.scene
 }
 
 export function getCurPage() {
@@ -96,10 +95,10 @@ export async function PageWrapper(config) {
     })
 }
 
-export function launchInit(context) {
+export function launchInit(App) {
     PageConstructor = Page
     Page = PageWrapper
-    setScene(context)
+    setScene(App)
 }
 
 function _login() {

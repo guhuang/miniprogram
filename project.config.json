@@ -42,7 +42,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.16.0",
   "appid": "wx679553c337701fcc",
-  "projectname": "the world",
+  "projectname": "the%20world",
   "debugOptions": {
     "hidedInDevtools": []
   },
