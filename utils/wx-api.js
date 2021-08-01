@@ -1,7 +1,8 @@
-export function showToast(title, duration) {
+export function showToast(title, duration = 1500) {
     return new Promise((resolve, reject) => {
         let config = {
             mask: true,
+            icon: 'none',
             success(value) {
                 resolve(value)
             },

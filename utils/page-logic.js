@@ -1,7 +1,7 @@
 import {
     PAGE_DEFAULT_LOGIN,
     ERROR_CODE_TOAST,
-} from './static-varible'
+} from '../config/static-varible'
 import {
     showToast
 } from './wx-api'

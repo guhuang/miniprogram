@@ -1,5 +1,8 @@
+/*
+* example
+* */
 export default {
-    userInfo: {
+    profileInfo: {
         method: 'POST',
         url: '/user/info'
     }
