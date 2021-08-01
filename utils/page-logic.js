@@ -1,3 +1,4 @@
+import $request from './request'
 import {
     PAGE_DEFAULT_LOGIN,
     ERROR_CODE_TOAST,
@@ -42,32 +43,33 @@ export async function PageWrapper(config) {
         }
     })
     const extraProperty = {
-        waitLogin: PAGE_DEFAULT_LOGIN,
-        options: {},
-        onLoadPromise: null,
+        _$request: $request,
+        _waitLogin: PAGE_DEFAULT_LOGIN,
+        _options: {},
+        _onLoadPromise: null,
     }
     const extraData = {
         isQYWX: false,
     }
     Object.assign((config.data || (config.data = {})), extraData)
     PageConstructor({
-        ...config,
         ...extraProperty,
+        ...config,
         async onLoad(options) {
             Object.keys(options).forEach(key => {
-                this.options[key] = options[key]
+                this._options[key] = options[key]
             })
-            this.onLoadPromise = (async () => {
-                if (this.waitLogin) {
+            this._onLoadPromise = (async () => {
+                if (this._waitLogin) {
                     await _login()
                 }
                 if (typeof config.onLoad === 'function') {
-                    await config.onLoad.call(this, this.options)
+                    await config.onLoad.call(this, this._options)
                 }
             })()
         },
         async onShow() {
-            await this.onLoadPromise
+            await this._onLoadPromise
             if (typeof config.onShow === 'function') {
                 config.onShow.call(this)
             }
@@ -108,9 +110,9 @@ function _login() {
 }
 
 function runner(rawFn) {
-    return function () {
+    return async function () {
         try {
-            return rawFn.apply(this, arguments)
+            return await rawFn.apply(this, arguments)
         } catch (e) {
             handleError(e)
         }

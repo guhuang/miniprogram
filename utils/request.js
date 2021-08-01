@@ -2,11 +2,7 @@ import { unique } from './util'
 import apiConfig from '../config/api'
 import envConfig from '../config/env'
 import {
-    ERROR_CODE_NORMAL,
-    ERROR_CODE_TOAST
-} from '../config/static-varible'
-import {
-    showToast
+    request,
 } from './wx-api'
 
 /*
@@ -17,29 +13,8 @@ class Request {
         this.registerApi(apiConfig)
     }
     static successState = 0
-    static _request(config) {
-        return new Promise((resolve, reject) => {
-            wx.request(Object.assign({}, config, {
-                success(value) {
-                    console.log('wx.request success:', value)
-                    if (typeof value.data !== 'object') {
-                        const msg = ERROR_CODE_TOAST[ERROR_CODE_NORMAL]
-                        showToast(msg)
-                        reject({ code: ERROR_CODE_NORMAL, msg })
-                    } else if (value.data.code !== Request.successState) {
-                        const msg = value.data.msg
-                        showToast(msg)
-                        reject({ code: value.data.code, msg })
-                    } else {
-                        resolve(value.data.data)
-                    }
-                },
-                fail(e) {
-                    console.log('wx.request fail:', e)
-                    reject(e)
-                }
-            }))
-        })
+    static async _request(config) {
+        return await request(config)
     }
     registerApi(apiConfig = {}) {
         Object.keys(apiConfig).forEach(apiName => {
